@@ -1,12 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX, HiHome, HiUser, HiCollection, HiMail } from 'react-icons/hi';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, []);
 
   return (
     <>
@@ -31,38 +41,39 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Fullscreen Overlay Menu with Animation */}
-    <AnimatePresence>
-      {menuOpen && (
-        <motion.div
-          key="menu"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.3 }}
-          onClick={() => setMenuOpen(false)}
-          className="fixed inset-0 z-40 bg-black/90 text-white flex items-center justify-center"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="flex flex-col items-center justify-center space-y-8 text-2xl"
+      {/* Fullscreen Overlay Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setMenuOpen(false)}
+            className="fixed inset-0 z-40 bg-black/70 backdrop-blur-md text-white flex items-center justify-center"
           >
-            <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-              <HiHome /> Home
-            </Link>
-            <Link href="/about" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-              <HiUser /> About
-            </Link>
-            <Link href="/projects" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-              <HiCollection /> Projects
-            </Link>
-            <Link href="/contact" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
-              <HiMail /> Contact
-            </Link>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="flex flex-col items-center justify-center space-y-8 text-2xl"
+            >
+              <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
+                <HiHome /> Home
+              </Link>
+              <Link href="/about" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
+                <HiUser /> About
+              </Link>
+              <Link href="/projects" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
+                <HiCollection /> Projects
+              </Link>
+              <Link href="/contact" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 hover:text-blue-400 transition-colors">
+                <HiMail /> Contact
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
