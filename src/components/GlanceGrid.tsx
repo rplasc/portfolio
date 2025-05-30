@@ -7,7 +7,7 @@ const glanceItems = [
   {
     icon: <FaLaptopCode size={28} />,
     title: 'Tech Stack',
-    description: 'React Native, Flask, AWS, PostgreSQL',
+    description: 'React, Flask, AWS, PostgreSQL',
   },
   {
     icon: <FaFolderOpen size={28} />,

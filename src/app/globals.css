@@ -5,13 +5,6 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -23,4 +16,49 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Glitch effect for name */
+@keyframes vhsFlicker {
+  0% {
+    text-shadow: 2px 0 red, -2px 0 blue;
+    transform: skew(0.5deg, 0.5deg);
+    opacity: 0.95;
+  }
+  20% {
+    text-shadow: -2px 0 red, 2px 0 blue;
+    transform: skew(-0.5deg, -0.5deg);
+    opacity: 1;
+  }
+  40% {
+    text-shadow: 1px 0 green, -1px 0 purple;
+    transform: skew(1deg, -1deg);
+    opacity: 0.9;
+  }
+  60% {
+    text-shadow: -1px 0 green, 1px 0 purple;
+    transform: skew(-1deg, 1deg);
+    opacity: 1;
+  }
+  80% {
+    text-shadow: 2px 0 red, -2px 0 blue;
+    transform: skew(0.3deg, 0.3deg);
+    opacity: 0.95;
+  }
+  100% {
+    text-shadow: 0 0 1px #fff;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.vhs-glitch {
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.vhs-glitch:hover {
+  animation: vhsFlicker 1s infinite alternate;
+  will-change: text-shadow, transform, opacity;
+  text-shadow: 0 0 4px #0ff, 0 0 6px #0ff;
 }

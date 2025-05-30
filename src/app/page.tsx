@@ -9,16 +9,16 @@ export default function HomePage() {
     <main>
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
         <h1 className="text-4xl md:text-6xl font-extrabold mb-4">
-          Hi, I’m <span className="text-blue-400">Raul Plascencia</span>
+          Hi, I’m <span className="vhs-glitch text-blue-400">Raul Plascencia</span>
         </h1>
 
         <h2 className="text-xl md:text-2xl font-medium text-gray-300">
           <Typewriter
             words={[
               'Full-Stack Developer',
-              'React Native Enthusiast',
               'Flask API Architect',
-              'Cloud Integration Specialist',
+              'Web Application Specialist',
+              'Beer Enthusiast',
             ]}
             loop={0}
             cursor
