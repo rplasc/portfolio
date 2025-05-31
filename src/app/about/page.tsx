@@ -63,6 +63,7 @@ export default function AboutPage() {
             className="text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
           >
             About Me
@@ -71,6 +72,7 @@ export default function AboutPage() {
             className="text-gray-300 text-lg leading-relaxed mb-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             I’m a Computer Science & Engineering student at UC Merced, passionate about building clean, scalable full-stack solutions. As the technical lead on my capstone project, I helped design and deliver a cross-platform file syncing app using React Native, Flask, and Rclone.
@@ -79,6 +81,7 @@ export default function AboutPage() {
             className="text-gray-400 text-base leading-relaxed mb-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             I thrive at the intersection of usability and performance — whether it's backend API design, mobile UX, or AI integration.
@@ -89,6 +92,7 @@ export default function AboutPage() {
             className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition shadow"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ delay: 0.6, duration: 0.4 }}
           >
             Download Resume
@@ -100,6 +104,7 @@ export default function AboutPage() {
             className="text-3xl font-semibold mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
           >
             Timeline
