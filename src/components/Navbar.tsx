@@ -66,7 +66,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 z-40 bg-black/70 backdrop-blur-md text-white flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md text-white flex items-center justify-center"
           >
             <motion.div
               onClick={(e) => e.stopPropagation()}
