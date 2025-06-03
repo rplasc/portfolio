@@ -53,10 +53,10 @@ export default function AboutPage() {
       <main className="bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white pt-32 px-6">
         <section id="about" className="max-w-3xl mx-auto text-center mb-24">
           <Image
-            src="/profile.png"
+            src="/profile.jpg"
             alt="Raul Plascencia"
-            width={160}
-            height={160}
+            width={320}
+            height={320}
             className="rounded-full border-2 border-white shadow-lg hover:shadow-blue-500/30 transition mx-auto mb-6"
           />
           <motion.h1
