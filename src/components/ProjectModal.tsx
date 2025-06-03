@@ -5,7 +5,22 @@ import ReactMarkdown from 'react-markdown';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import remarkGfm from 'remark-gfm';
 
-export default function ProjectModal({ project, onClose }) {
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  tags: string[];
+  github: string;
+  demo: string;
+  details: string;
+}
+
+interface ProjectModalProps {
+  project: Project;
+  onClose: () => void;
+}
+
+export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   if (!project) return null;
 
   return (
