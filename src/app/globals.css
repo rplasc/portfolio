@@ -66,3 +66,15 @@ html {
   will-change: text-shadow, transform, opacity;
   text-shadow: 0 0 4px #0ff, 0 0 6px #0ff;
 }
+
+.prose ul {
+  @apply list-disc pl-5;
+}
+
+.prose ol {
+  @apply list-decimal pl-5;
+}
+
+.prose li::marker {
+  color: #60a5fa;
+}
