@@ -6,10 +6,12 @@ import ProjectModal from '../../components/ProjectModal';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import projects from '@/data/projects';
 
+type Project = typeof projects[number];
+
 export default function ProjectsPage() {
   const allTags = [...new Set(projects.flatMap(p => p.tags))];
   const [activeTag, setActiveTag] = useState("All");
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filtered = activeTag === "All"
     ? projects
