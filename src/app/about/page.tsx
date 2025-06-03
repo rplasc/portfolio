@@ -55,8 +55,8 @@ export default function AboutPage() {
           <Image
             src="/profile.jpg"
             alt="Raul Plascencia"
-            width={320}
-            height={320}
+            width={240}
+            height={240}
             className="rounded-full border-2 border-white shadow-lg hover:shadow-blue-500/30 transition mx-auto mb-6"
           />
           <motion.h1

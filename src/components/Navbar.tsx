@@ -36,8 +36,8 @@ export default function Navbar() {
   return (
     <>
       {/* Top Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50">
-        <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+      <nav className="fixed backdrop-blur-md top-0 left-0 w-full z-50">
+        <div className="flex items-center justify-between px-4 py-4 max-w-7xl mx-auto">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 mr-auto">
             <div className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-black font-semibold text-sm hover:scale-105 transition">
