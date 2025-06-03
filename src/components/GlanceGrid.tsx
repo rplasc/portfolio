@@ -17,7 +17,7 @@ const glanceItems = [
   {
     icon: <FaRocket size={28} />,
     title: 'Goals',
-    description: 'Join a forward-thinking engineering team',
+    description: 'Create forward-thinking user experiences',
   },
 ];
 
