@@ -4,19 +4,10 @@ import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import remarkGfm from 'remark-gfm';
-
-interface Project {
-  title: string;
-  description: string;
-  tech: string[];
-  tags: string[];
-  github: string;
-  demo: string;
-  details: string;
-}
+import projects from '@/data/projects';
 
 interface ProjectModalProps {
-  project: Project;
+  project: typeof projects[number];
   onClose: () => void;
 }
 

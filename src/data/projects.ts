@@ -1,13 +1,13 @@
 const projects = [
   {
-    title: "Capstone Project",
+    title: "Capstone Project - Mobile App & Cloud Server",
     description: "Cross-platform file syncing app",
     tech: ["React Native", "Flask", "Rclone"],
     tags: ["Client Project", "Mobile", "Full-Stack"],
     github: "",
     demo: "",
     details: String.raw`
-Served as Tech Lead on a full-stack file sync app built for a real-world client.  
+Served as Tech Lead on a full-stack file sync app built for a real-world client, *Sweep*.  
 Developed the backend API using Flask, implemented OAuth login with Google and Dropbox, and optimized the Android experience in React Native.
 
 **Tech Stack:**
