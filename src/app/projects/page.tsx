@@ -6,6 +6,7 @@ import ProjectCard from '@/components/ProjectCard'; // Make sure this matches yo
 import ProjectModal from '@/components/ProjectModal';
 import { BackgroundBeams } from '@/components/BackgroundBeams'; // Reuse the component we made earlier
 import projects from '@/data/projects';
+import CyberText from '@/components/CyberText';
 
 type Project = typeof projects[number];
 
@@ -34,7 +35,7 @@ export default function ProjectsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Projects</span>
+            <CyberText text='My' /> <CyberText text='Projects' className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400" />
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }} 

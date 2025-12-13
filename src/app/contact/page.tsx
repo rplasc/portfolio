@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa';
 import { BackgroundBeams } from '@/components/BackgroundBeams';
+import CyberText from '@/components/CyberText';
 
 export default function ContactPage() {
   const contactItems = [
@@ -47,7 +48,7 @@ export default function ContactPage() {
           className="mb-16"
         >
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
-            Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Touch</span>
+            <CyberText text='Get in' /> <CyberText text='Touch' className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400" />
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
             I'm currently looking for new opportunities as a Software Engineer. 

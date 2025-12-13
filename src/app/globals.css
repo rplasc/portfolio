@@ -78,3 +78,78 @@ html {
 .prose li::marker {
   color: #60a5fa;
 }
+
+.scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.05)
+  );
+  background-size: 100% 4px;
+  animation: scanlineMove 10s linear infinite;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0.9;
+}
+
+@keyframes scanlineMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+
+/* Image Glitch Container */
+.glitch-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.glitch-wrapper::before,
+.glitch-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  background-image: inherit;
+  background-size: cover;
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.glitch-wrapper:hover::before {
+  opacity: 1;
+  animation: glitch-slice-1 0.3s infinite linear alternate-reverse;
+}
+
+.glitch-wrapper:hover::after {
+  opacity: 1;
+  animation: glitch-slice-2 0.3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-slice-1 {
+  0% { clip-path: inset(10% 0 80% 0); transform: translate(-5px, 0); }
+  20% { clip-path: inset(80% 0 5% 0); transform: translate(5px, 0); }
+  40% { clip-path: inset(40% 0 50% 0); transform: translate(-5px, 0); }
+  60% { clip-path: inset(20% 0 60% 0); transform: translate(5px, 0); }
+  80% { clip-path: inset(60% 0 20% 0); transform: translate(-5px, 0); }
+  100% { clip-path: inset(30% 0 30% 0); transform: translate(5px, 0); }
+}
+
+@keyframes glitch-slice-2 {
+  0% { clip-path: inset(50% 0 30% 0); transform: translate(5px, 0); }
+  20% { clip-path: inset(10% 0 60% 0); transform: translate(-5px, 0); }
+  40% { clip-path: inset(70% 0 10% 0); transform: translate(5px, 0); }
+  60% { clip-path: inset(30% 0 50% 0); transform: translate(-5px, 0); }
+  80% { clip-path: inset(20% 0 20% 0); transform: translate(5px, 0); }
+  100% { clip-path: inset(60% 0 10% 0); transform: translate(-5px, 0); }
+}

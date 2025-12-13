@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import timeline from '@/data/timeline';
 import { BackgroundBeams } from '@/components/BackgroundBeams';
+import CyberText from '@/components/CyberText';
 import { FaGraduationCap, FaHeart, FaMusic, FaFileDownload } from 'react-icons/fa';
 
 export default function AboutPage() {
@@ -44,14 +45,17 @@ export default function AboutPage() {
           >
             <div className="absolute inset-0 bg-blue-500/30 blur-2xl rounded-full scale-110 group-hover:scale-125 transition-transform duration-500" />
             
-            <Image
-              src="/profile.jpg"
-              alt="Raul Plascencia"
-              width={200}
-              height={200}
-              className="relative z-10 rounded-full border-2 border-white/20 shadow-2xl object-cover"
-              priority
-            />
+            <div 
+              className="glitch-wrapper rounded-full relative w-[300px] h-[300px]"
+              style={{ backgroundImage: 'url(/profile.jpg)' }}
+            >
+              <Image
+                src="/profile.jpg"
+                alt="Raul"
+                fill
+                className="rounded-full object-cover"
+              />
+            </div>
           </motion.div>
 
           <motion.h1
@@ -60,7 +64,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Me</span>
+            <CyberText text='About' /> <CyberText text='Me' className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300" />
           </motion.h1>
 
           <motion.p

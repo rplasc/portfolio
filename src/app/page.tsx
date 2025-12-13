@@ -5,6 +5,7 @@ import { Typewriter } from "react-simple-typewriter";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BackgroundBeams } from "@/components/BackgroundBeams";
+import CyberText from "@/components/CyberText";
 export default function HomePage() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -35,7 +36,7 @@ export default function HomePage() {
         >
           
           <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
-            Hi, I’m <span className="vhs-glitch text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Raul Plascencia</span>
+            <CyberText text="Hi, I'm" /> <span className="vhs-glitch text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Raul Plascencia</span>
           </motion.h1>
 
           <motion.h2 variants={itemVariants} className="text-xl md:text-3xl font-medium text-gray-400 h-12">
