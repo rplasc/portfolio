@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ProjectModal from '../../components/ProjectModal';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import ProjectCard from '@/components/ProjectCard'; // Make sure this matches your folder structure
+import ProjectModal from '@/components/ProjectModal';
+import { BackgroundBeams } from '@/components/BackgroundBeams'; // Reuse the component we made earlier
 import projects from '@/data/projects';
 
 type Project = typeof projects[number];
@@ -18,72 +19,90 @@ export default function ProjectsPage() {
     : projects.filter(p => p.tags.includes(activeTag));
 
   return (
-    <main className="bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white pt-28 px-6 min-h-screen">
-      <section className="max-w-5xl mx-auto">
-        <motion.h1
-          className="text-4xl font-bold mb-8 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          Projects
-        </motion.h1>
+    <main className="relative min-h-screen w-full bg-gray-950 text-white pt-32 pb-20 px-4 overflow-x-hidden">
+      
+      {/* 1. Dynamic Background */}
+      <BackgroundBeams />
+
+      <section className="relative z-10 max-w-6xl mx-auto">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <motion.h1
+            className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Projects</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ delay: 0.2 }}
+            className="text-gray-400 max-w-2xl mx-auto"
+          >
+            A selection of my recent work, ranging from full-stack applications to AI integrations.
+          </motion.p>
+        </div>
 
         {/* Tag Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-2 mb-12"
+        >
           {["All", ...allTags].map(tag => (
             <button
               key={tag}
               onClick={() => setActiveTag(tag)}
-              className={`px-4 py-1 rounded-full text-sm transition border ${
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeTag === tag
-                  ? "bg-blue-500 text-white"
-                  : "text-blue-400 border-blue-400 hover:bg-blue-500 hover:text-white"
+                  ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)] scale-105"
+                  : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/5"
               }`}
             >
               {tag}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Projects Grid */}
-        {filtered.length === 0 ? (
-          <p className="text-center text-gray-400">No projects found for this tag.</p>
-        ) : (
-          <div className="grid gap-6 md:grid-cols-2">
-            <AnimatePresence mode="sync">
-              {filtered.map((project) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.4 }}
+        <motion.div 
+          layout 
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <motion.div
+                layout
+                key={project.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ProjectCard 
+                  {...project} 
                   onClick={() => setSelectedProject(project)}
-                  className="cursor-pointer"
-                >
-                  <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-md border border-white/10 hover:shadow-blue-500/10 transition-transform transform hover:-translate-y-1 hover:scale-[1.01] duration-300">
-                    <h2 className="text-xl font-semibold text-white mb-1">{project.title}</h2>
-                    <p className="text-gray-300 mb-2">{project.description}</p>
-                    <p className="text-sm text-blue-300 mb-4">{project.tech.join(', ')}</p>
-                    <div className="flex gap-4 text-blue-400 text-sm">
-                      {project.github && (
-                        <span className="flex items-center gap-1">
-                          <FaGithub /> GitHub
-                        </span>
-                      )}
-                      {project.demo && (
-                        <span className="flex items-center gap-1">
-                          <FaExternalLinkAlt /> Live Demo
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Empty State */}
+        {filtered.length === 0 && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            className="text-center py-20 text-gray-500"
+          >
+            No projects found with this tag.
+          </motion.div>
         )}
+
       </section>
 
       {/* Modal */}

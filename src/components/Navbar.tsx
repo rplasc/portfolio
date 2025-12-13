@@ -2,134 +2,133 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // Useful for active states
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX, HiHome, HiUser, HiCollection, HiMail } from 'react-icons/hi';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // ESC key listener
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMenuOpen(false);
-    };
-    document.addEventListener('keydown', handleEsc);
-    return () => document.removeEventListener('keydown', handleEsc);
-  }, []);
+  const pathname = usePathname();
 
   // Scroll lock when menu is open
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : 'auto';
-    return () => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
       document.body.style.overflow = 'auto';
-    };
-  }, [menuOpen]);  
+    }
+  }, [menuOpen]);
 
   const navLinks = [
     { label: 'Home', href: '/', icon: <HiHome /> },
+    { label: 'Projects', href: '/projects', icon: <HiCollection /> }, // Reordered for priority
     { label: 'About', href: '/about', icon: <HiUser /> },
-    { label: 'Projects', href: '/projects', icon: <HiCollection /> },
     { label: 'Contact', href: '/contact', icon: <HiMail /> },
   ];
 
   return (
     <>
-      {/* Top Navbar */}
-      <nav className="fixed backdrop-blur-md top-0 left-0 w-full z-50">
-        <div className="flex items-center justify-between px-4 py-4 max-w-7xl mx-auto">
+      {/* Floating Navbar Container */}
+      <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+        <nav className="w-full max-w-3xl rounded-full border border-white/10 bg-black/60 backdrop-blur-xl shadow-lg px-6 py-3 flex items-center justify-between transition-all hover:border-white/20">
+          
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 mr-auto">
-            <div className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-black font-semibold text-sm hover:scale-105 transition">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-black font-bold text-xs group-hover:scale-110 transition-transform">
               R
             </div>
+            <span className="font-semibold text-sm tracking-wide hidden sm:block">Raul Plascencia</span>
           </Link>
 
-          {/* Hamburger Icon */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="text-white text-2xl ml-auto translate-x-2"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <HiX /> : <HiMenu />}
-          </button>
-        </div>
-      </nav>
+          {/* Desktop Links (Hidden on Mobile) */}
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.href} 
+                  href={link.href} 
+                  className={`text-sm font-medium transition-colors hover:text-blue-400 ${isActive ? 'text-white' : 'text-gray-400'}`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
 
-      {/* Fullscreen Menu */}
+          {/* Socials (Desktop) */}
+          <div className="hidden md:flex items-center gap-4 text-gray-400 border-l border-white/10 pl-6 ml-2">
+             <a href="https://github.com/rplasc" target="_blank" className="hover:text-white transition-colors"><FaGithub size={18} /></a>
+             <a href="https://linkedin.com/in/raul-plascencia" target="_blank" className="hover:text-blue-400 transition-colors"><FaLinkedin size={18} /></a>
+          </div>
+
+          {/* Mobile Hamburger (Visible on Mobile) */}
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="md:hidden text-gray-300 hover:text-white transition-colors"
+            aria-label="Open menu"
+          >
+            <HiMenu size={24} />
+          </button>
+        </nav>
+      </div>
+
+      {/* Fullscreen Mobile Menu Overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            key="menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md text-white flex items-center justify-center"
+            className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-xl flex flex-col items-center justify-center"
           >
-            <motion.div
-              onClick={(e) => e.stopPropagation()}
+            {/* Close Button */}
+            <button 
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-8 right-8 text-gray-400 hover:text-white"
+            >
+              <HiX size={32} />
+            </button>
+
+            <motion.div 
+              className="flex flex-col gap-8 text-center"
               initial="hidden"
               animate="visible"
-              exit="exit"
+              exit="hidden"
               variants={{
                 visible: { transition: { staggerChildren: 0.1 } },
-                hidden: {},
-                exit: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
+                hidden: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
               }}
-              className="flex flex-col items-center justify-center space-y-8 text-2xl"
             >
-              {navLinks.map(({ label, href, icon }, index) => (
+              {navLinks.map((link) => (
                 <motion.div
-                  key={href}
+                  key={link.href}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                    exit: { opacity: 0, y: 10 }
+                    visible: { opacity: 1, y: 0 }
                   }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
-                  <Link
-                    href={href}
+                  <Link 
+                    href={link.href} 
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 hover:text-blue-400 transition-colors"
+                    className="text-3xl font-light hover:text-blue-400 transition-colors flex items-center gap-3 justify-center"
                   >
-                    {icon} {label}
+                    {link.icon} {link.label}
                   </Link>
                 </motion.div>
               ))}
-              {/* Social Icons */}
-              <motion.div
-                className="mt-12 flex space-x-6 text-2xl text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ delay: 0.4, duration: 0.5, ease: 'easeOut' }}
+              
+              <motion.div 
+                className="flex justify-center gap-8 mt-8 text-3xl text-gray-400"
+                variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 }
+                }}
               >
-                <motion.a
-                  href="https://github.com/rplasc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="hover:text-blue-400 transition"
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaGithub />
-                </motion.a>
-                <motion.a
-                  href="https://linkedin.com/in/raul-plascencia"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="hover:text-blue-400 transition"
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaLinkedin />
-                </motion.a>
-              </motion.div>              
+                 <a href="https://github.com/rplasc" target="_blank"><FaGithub /></a>
+                 <a href="https://linkedin.com/in/raul-plascencia" target="_blank"><FaLinkedin /></a>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
