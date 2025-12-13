@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
-import { FaCode, FaCloud, FaUniversity } from 'react-icons/fa';
+import { FaRobot, FaCloud, FaUniversity } from 'react-icons/fa';
 import { FaComputer } from 'react-icons/fa6';
 
 export interface TimelineEntry {
   title: string;
+  company: string;
   date: string;
   description: string;
   icon: ReactNode;
@@ -11,26 +12,37 @@ export interface TimelineEntry {
 
 const timeline: TimelineEntry[] = [
   {
-    title: 'Capstone Project — Technical Lead',
-    date: '2025',
-    description: 'Collaborated in a team that built a cross-platform file sync app using React Native, Flask, and Rclone.',
-    icon: <FaCode className="text-blue-400 text-xl" />,
+    title: 'AI Trainer - Multimodal Vision',
+    company: 'Handshake AI Fellowship',
+    date: 'Dec 2025 - Present',
+    description: 'Evaluated multimodal model outputs (text, visual, and audio) to improve LLM accuracy and reliability.',
+    icon: <FaRobot className='text-blue-400 text-xl' />,
   },
   {
-    title: 'Intern — Cloud Integration',
-    date: '2025',
-    description: 'Was responsible for designing the API and optimizing the Android version of a mobile app for a startup.',
+    title: 'Graduated from UC Merced',
+    company: 'University of California, Merced',
+    date: 'Aug 2025',
+    description: 'Graduated with a B.S. in Computer Science & Engineering',
+    icon: <FaUniversity className="text-blue-400 text-xl" />,
+  },
+  {
+    title: 'Sofware Engineer Intern (Technical Lead)',
+    company: 'sweep',
+    date: 'Jan 2025 - May 2025',
+    description: 'Led a team of 4 to build a cross-platform file syncing app.',
     icon: <FaCloud className="text-blue-400 text-xl" />,
   },
   {
     title: 'Transferred to UC Merced',
-    date: '2023',
-    description: 'Began journey into full-stack development, algorithms, and system design.',
+    company: 'University of California, Merced',
+    date: 'Aug 2023',
+    description: 'Majoring in Computer Science & Engineering.',
     icon: <FaUniversity className="text-blue-400 text-xl" />,
   },
   {
     title: 'Enrolled at Allan Hancock College',
-    date: '2020',
+    company: 'Alan Hancock College',
+    date: 'June 2020 - May 2023',
     description: 'Took first CS class (Intro to HTML) at Allan Hancock College the summer after high school graduation.',
     icon: <FaComputer className="text-blue-400 text-xl" />,
   },

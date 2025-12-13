@@ -23,14 +23,14 @@ Developed the backend API using Flask, implemented OAuth login with Google and D
   },
   {
     title: "Chopperbot",
-    description: "Multipurpose Discord bot with ChatGPT integration",
-    tech: ["Python", "Discord.py", "OpenAI"],
-    tags: ["AI", "Backend"],
+    description: "Self-Hosted Conversational Discord bot with LLM integrations",
+    tech: ["Python", "Discord.py", "OpenAI", "KoboldCPP"],
+    tags: ["AI", "Backend", "Self-Hosted"],
     github: "https://github.com/rplasc/ChopperBot",
     demo: "",
     details: `
-Created a multipurpose Discord bot in Python with GPT integration.  
-Integrated OpenAI APIs to enable dynamic chat interactions and customizable conversation personalities.
+Created a multipurpose Discord bot in Python with ChatGPT integration.  
+Uses local LLM to enable dynamic chat interactions with customizable conversation personalities and a complex memory system.
 
 **Tech Stack:**
 
@@ -38,7 +38,9 @@ Integrated OpenAI APIs to enable dynamic chat interactions and customizable conv
 
 -   Discord.py
 
--   Open AI API
+-   KoboldCPP
+
+-   OpenAI API
 `,
   },
   {

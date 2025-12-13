@@ -10,7 +10,7 @@ export default function AboutPage() {
   const sections = [
     {
       title: 'Education',
-      content: 'B.S. in Computer Science & Engineering — UC Merced (Graduating August 2025)',
+      content: 'B.S. in Computer Science & Engineering — UC Merced',
       icon: <FaGraduationCap className="text-blue-300" size={28} />,
       border: "hover:border-blue-500/50"
     },
@@ -70,7 +70,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            I’m a Computer Science & Engineering student at UC Merced, passionate about building clean, scalable full-stack solutions. I thrive at the intersection of usability and performance — whether it's backend API design, mobile UX, or AI integration.
+            I’m a recent Computer Science & Engineering graduate who is passionate about building clean, scalable full-stack solutions. I thrive at the intersection of usability and performance, from backend API design and mobile UX to AI integration.
           </motion.p>
 
           <motion.div
@@ -119,9 +119,14 @@ export default function AboutPage() {
                 
                 {/* Content */}
                 <div className="bg-white/5 border border-white/5 p-5 rounded-xl hover:bg-white/10 transition-colors">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                    <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                    <span className="text-sm text-blue-300 font-mono mt-1 sm:mt-0">{item.date}</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1 sm:gap-4">
+                    <h3 className="text-xl font-bold text-white">
+                      {item.title} 
+                      {item.company && <span className="text-blue-400 font-normal"> @ {item.company}</span>}
+                    </h3>
+                    <span className="text-xs font-bold uppercase tracking-wider text-gray-400 bg-white/5 px-2 py-1 rounded-md whitespace-nowrap">
+                      {item.date}
+                    </span>
                   </div>
                   <p className="text-gray-400 leading-relaxed">{item.description}</p>
                 </div>
