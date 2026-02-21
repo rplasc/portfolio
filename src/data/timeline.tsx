@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { FaRobot, FaCloud, FaUniversity } from 'react-icons/fa';
+import { FaRobot, FaCloud, FaUniversity, FaCode } from 'react-icons/fa';
 import { FaComputer } from 'react-icons/fa6';
 
 export interface TimelineEntry {
@@ -11,10 +11,17 @@ export interface TimelineEntry {
 }
 
 const timeline: TimelineEntry[] = [
+    {
+    title: 'Software Development Engineer',
+    company: 'Gaine Technology',
+    date: 'Feb 2026 - Present',
+    description: 'Built end-to-end features, from UI components in Angular to the supporting logic in our C# .NET services.',
+    icon: <FaCode className='text-blue-400 text-xl' />,
+  },
   {
     title: 'AI Trainer - Multimodal Vision',
     company: 'Handshake AI Fellowship',
-    date: 'Dec 2025 - Present',
+    date: 'Dec 2025 - Feb 2026',
     description: 'Evaluated multimodal model outputs (text, visual, and audio) to improve LLM accuracy and reliability.',
     icon: <FaRobot className='text-blue-400 text-xl' />,
   },
