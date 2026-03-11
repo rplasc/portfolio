@@ -1,70 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --bg: #0b0c10;
+  --bg-soft: #15171c;
+  --ink: #f2f2f2;
+  --muted: #b5bac3;
+  --accent: #8aa6ff;
+  --accent-2: #7ecbff;
+  --line: rgba(255, 255, 255, 0.12);
+  --footer-height: 48px;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Glitch effect for name */
-@keyframes vhsFlicker {
-  0% {
-    text-shadow: 2px 0 red, -2px 0 blue;
-    transform: skew(0.5deg, 0.5deg);
-    opacity: 0.95;
-  }
-  20% {
-    text-shadow: -2px 0 red, 2px 0 blue;
-    transform: skew(-0.5deg, -0.5deg);
-    opacity: 1;
-  }
-  40% {
-    text-shadow: 1px 0 green, -1px 0 purple;
-    transform: skew(1deg, -1deg);
-    opacity: 0.9;
-  }
-  60% {
-    text-shadow: -1px 0 green, 1px 0 purple;
-    transform: skew(-1deg, 1deg);
-    opacity: 1;
-  }
-  80% {
-    text-shadow: 2px 0 red, -2px 0 blue;
-    transform: skew(0.3deg, 0.3deg);
-    opacity: 0.95;
-  }
-  100% {
-    text-shadow: 0 0 1px #fff;
-    transform: none;
-    opacity: 1;
-  }
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  min-height: 100%;
+  padding-bottom: var(--footer-height);
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, rgba(138, 166, 255, 0.12), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, rgba(126, 203, 255, 0.10), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 30%);
+  background-attachment: fixed;
 }
 
-.vhs-glitch {
-  display: inline-block;
-  transition: all 0.2s ease;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
-.vhs-glitch:hover {
-  animation: vhsFlicker 1s infinite alternate;
-  will-change: text-shadow, transform, opacity;
-  text-shadow: 0 0 4px #0ff, 0 0 6px #0ff;
+::selection {
+  background: rgba(125, 182, 255, 0.35);
+  color: #0b1222;
+}
+
+.accent-text {
+  position: relative;
+  display: inline;
+  background: linear-gradient(120deg, rgba(125, 182, 255, 0.25), rgba(125, 182, 255, 0));
+  padding: 0 0.2em;
+  border-radius: 0.2em;
 }
 
 .prose ul {
@@ -76,80 +58,22 @@ html {
 }
 
 .prose li::marker {
-  color: #60a5fa;
+  color: var(--accent);
 }
 
-.scanlines {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0) 50%,
-    rgba(255, 255, 255, 0.05) 50%,
-    rgba(255, 255, 255, 0.05)
-  );
-  background-size: 100% 4px;
-  animation: scanlineMove 10s linear infinite;
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  opacity: 0.4;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
 }
 
-@keyframes scanlineMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 100%; }
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* Image Glitch Container */
-.glitch-wrapper {
-  position: relative;
-  overflow: hidden;
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
 }
 
-.glitch-wrapper::before,
-.glitch-wrapper::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: inherit;
-  background-image: inherit;
-  background-size: cover;
-  opacity: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.glitch-wrapper:hover::before {
-  opacity: 1;
-  animation: glitch-slice-1 0.3s infinite linear alternate-reverse;
-}
-
-.glitch-wrapper:hover::after {
-  opacity: 1;
-  animation: glitch-slice-2 0.3s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-slice-1 {
-  0% { clip-path: inset(10% 0 80% 0); transform: translate(-5px, 0); }
-  20% { clip-path: inset(80% 0 5% 0); transform: translate(5px, 0); }
-  40% { clip-path: inset(40% 0 50% 0); transform: translate(-5px, 0); }
-  60% { clip-path: inset(20% 0 60% 0); transform: translate(5px, 0); }
-  80% { clip-path: inset(60% 0 20% 0); transform: translate(-5px, 0); }
-  100% { clip-path: inset(30% 0 30% 0); transform: translate(5px, 0); }
-}
-
-@keyframes glitch-slice-2 {
-  0% { clip-path: inset(50% 0 30% 0); transform: translate(5px, 0); }
-  20% { clip-path: inset(10% 0 60% 0); transform: translate(-5px, 0); }
-  40% { clip-path: inset(70% 0 10% 0); transform: translate(5px, 0); }
-  60% { clip-path: inset(30% 0 50% 0); transform: translate(-5px, 0); }
-  80% { clip-path: inset(20% 0 20% 0); transform: translate(5px, 0); }
-  100% { clip-path: inset(60% 0 10% 0); transform: translate(-5px, 0); }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }

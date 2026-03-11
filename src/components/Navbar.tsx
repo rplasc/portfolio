@@ -30,12 +30,12 @@ export default function Navbar() {
   return (
     <>
       {/* Floating Navbar Container */}
-      <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
-        <nav className="w-full max-w-3xl rounded-full border border-white/10 bg-black/60 backdrop-blur-xl shadow-lg px-6 py-3 flex items-center justify-between transition-all hover:border-white/20">
+      <div className="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-4">
+        <nav className="w-full max-w-4xl rounded-full border border-white/10 bg-[color:var(--bg-soft)]/70 backdrop-blur-xl shadow-lg px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between transition-all hover:border-white/20">
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-black font-bold text-xs group-hover:scale-110 transition-transform">
+            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-[color:var(--accent)] text-[#1b1f2a] font-bold text-xs group-hover:scale-110 transition-transform">
               R
             </div>
             <span className="font-semibold text-sm tracking-wide hidden sm:block">Raul Plascencia</span>
@@ -49,7 +49,7 @@ export default function Navbar() {
                 <Link 
                   key={link.href} 
                   href={link.href} 
-                  className={`text-sm font-medium transition-colors hover:text-blue-400 ${isActive ? 'text-white' : 'text-gray-400'}`}
+                  className={`text-sm font-medium transition-colors hover:text-[color:var(--accent)] ${isActive ? 'text-white' : 'text-[color:var(--muted)]'}`}
                 >
                   {link.label}
                 </Link>
@@ -58,15 +58,15 @@ export default function Navbar() {
           </div>
 
           {/* Socials (Desktop) */}
-          <div className="hidden md:flex items-center gap-4 text-gray-400 border-l border-white/10 pl-6 ml-2">
-             <a href="https://github.com/rplasc" target="_blank" className="hover:text-white transition-colors"><FaGithub size={18} /></a>
-             <a href="https://linkedin.com/in/raul-plascencia" target="_blank" className="hover:text-blue-400 transition-colors"><FaLinkedin size={18} /></a>
+          <div className="hidden md:flex items-center gap-4 text-[color:var(--muted)] border-l border-white/10 pl-6 ml-2">
+             <a href="https://github.com/rplasc" target="_blank" className="hover:text-white transition-colors" rel="noreferrer"><FaGithub size={18} /></a>
+             <a href="https://linkedin.com/in/raul-plascencia" target="_blank" className="hover:text-[color:var(--accent)] transition-colors" rel="noreferrer"><FaLinkedin size={18} /></a>
           </div>
 
           {/* Mobile Hamburger (Visible on Mobile) */}
           <button
             onClick={() => setMenuOpen(true)}
-            className="md:hidden text-gray-300 hover:text-white transition-colors"
+            className="md:hidden text-[color:var(--muted)] hover:text-white transition-colors"
             aria-label="Open menu"
           >
             <HiMenu size={24} />
@@ -81,12 +81,12 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-xl flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[60] bg-[color:var(--bg)]/95 backdrop-blur-xl flex flex-col items-center justify-center"
           >
             {/* Close Button */}
             <button 
               onClick={() => setMenuOpen(false)}
-              className="absolute top-8 right-8 text-gray-400 hover:text-white"
+              className="absolute top-8 right-8 text-[color:var(--muted)] hover:text-white"
             >
               <HiX size={32} />
             </button>
@@ -112,7 +112,7 @@ export default function Navbar() {
                   <Link 
                     href={link.href} 
                     onClick={() => setMenuOpen(false)}
-                    className="text-3xl font-light hover:text-blue-400 transition-colors flex items-center gap-3 justify-center"
+                    className="text-3xl font-light hover:text-[color:var(--accent)] transition-colors flex items-center gap-3 justify-center"
                   >
                     {link.icon} {link.label}
                   </Link>
@@ -120,14 +120,14 @@ export default function Navbar() {
               ))}
               
               <motion.div 
-                className="flex justify-center gap-8 mt-8 text-3xl text-gray-400"
+                className="flex justify-center gap-8 mt-8 text-3xl text-[color:var(--muted)]"
                 variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0 }
                 }}
               >
-                 <a href="https://github.com/rplasc" target="_blank"><FaGithub /></a>
-                 <a href="https://linkedin.com/in/raul-plascencia" target="_blank"><FaLinkedin /></a>
+                 <a href="https://github.com/rplasc" target="_blank" rel="noreferrer"><FaGithub /></a>
+                 <a href="https://linkedin.com/in/raul-plascencia" target="_blank" rel="noreferrer"><FaLinkedin /></a>
               </motion.div>
             </motion.div>
           </motion.div>

@@ -1,12 +1,13 @@
 'use client';
 
 import GlanceGrid from "@/components/GlanceGrid";
-import { Typewriter } from "react-simple-typewriter";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BackgroundBeams } from "@/components/BackgroundBeams";
 import CyberText from "@/components/CyberText";
+import projects from "@/data/projects";
 export default function HomePage() {
+  const featuredProject = projects.find((project) => project.featured) ?? projects[0];
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -23,10 +24,10 @@ export default function HomePage() {
   };
 
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-gray-950 text-white">
+    <main className="relative min-h-screen w-full overflow-hidden">
       <BackgroundBeams />
 
-      <section className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-20 sm:pt-24 text-center">
+      <section className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 pt-24 text-center">
         
         <motion.div
           variants={containerVariants}
@@ -35,34 +36,28 @@ export default function HomePage() {
           className="flex flex-col items-center max-w-4xl"
         >
           
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
-            <CyberText text="Hi, I'm" /> <span className="vhs-glitch text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Raul Plascencia</span>
+          <motion.p
+            variants={itemVariants}
+            className="text-sm uppercase tracking-[0.35em] text-[color:var(--muted)] mb-6"
+          >
+            Software Engineer
+          </motion.p>
+
+          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl font-semibold mb-6 tracking-tight">
+            Raul Plascencia
           </motion.h1>
 
-          <motion.h2 variants={itemVariants} className="text-xl md:text-3xl font-medium text-gray-400 h-12">
-            <span className="mr-2">Building</span>
-            <span className="text-blue-200">
-              <Typewriter
-                words={[
-                  'Full-Stack Solutions',
-                  'Scalable Flask APIs',
-                  'Robust Cloud Architectures',
-                  'Seamless User Experiences',
-                ]}
-                loop={0}
-                cursor
-                cursorStyle="_"
-                typeSpeed={80}
-                deleteSpeed={60}
-                delaySpeed={2000}
-              />
+          <motion.h2 variants={itemVariants} className="text-base sm:text-lg md:text-2xl font-medium text-[color:var(--muted)] max-w-2xl">
+            I build clean, durable systems and front-ends with a calm, product-first mindset.
+            <span className="block mt-3 text-base md:text-lg text-[color:var(--ink)]">
+              Currently shipping at <CyberText text="Gaine Technology" />.
             </span>
           </motion.h2>
 
-          <motion.div variants={itemVariants} className="mt-10 flex flex-wrap sm:flex-row gap-6 justify-center">
+          <motion.div variants={itemVariants} className="mt-10 flex flex-wrap sm:flex-row gap-4 justify-center">
             <Link 
               href="/projects" 
-              className="group relative px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]"
+              className="group relative px-8 py-3 bg-[color:var(--accent)] text-[#1b1f2a] font-semibold rounded-full transition-all shadow-[0_12px_30px_rgba(244,176,122,0.25)] hover:translate-y-[-1px]"
             >
               View Projects
               <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
@@ -70,14 +65,54 @@ export default function HomePage() {
             
             <Link 
               href="/about" 
-              className="px-8 py-3 border border-gray-600 hover:border-white text-gray-300 hover:text-white font-medium rounded-full transition-all hover:bg-white/5 backdrop-blur-sm"
+              className="px-8 py-3 border border-white/10 hover:border-white/20 text-[color:var(--muted)] hover:text-white font-medium rounded-full transition-all hover:bg-white/5 backdrop-blur-sm"
             >
               About Me
             </Link>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="mt-16 w-full">
+          <motion.div variants={itemVariants} className="mt-12 sm:mt-16 w-full">
             <GlanceGrid />
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="mt-10 w-full">
+            <div className="max-w-5xl mx-auto px-2">
+              <div className="rounded-3xl border border-white/10 bg-[color:var(--bg-soft)]/80 p-6 sm:p-8 md:p-10 text-left">
+                <p className="text-xs uppercase tracking-[0.35em] text-[color:var(--muted)] mb-4">
+                  Featured Project
+                </p>
+                <h3 className="text-2xl md:text-3xl font-semibold mb-3">
+                  {featuredProject?.title}
+                </h3>
+                <p className="text-[color:var(--muted)] leading-relaxed mb-6">
+                  {featuredProject?.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {featuredProject?.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-3 py-1 text-xs font-medium text-[color:var(--accent)] bg-[color:var(--accent)]/10 border border-[color:var(--accent)]/20 rounded-full"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    href="/projects"
+                    className="px-6 py-3 rounded-full bg-[color:var(--accent)] text-[#1b1f2a] font-semibold transition-transform hover:translate-y-[-1px]"
+                  >
+                    Read the case study
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="px-6 py-3 rounded-full border border-white/10 text-[color:var(--muted)] hover:text-white hover:border-white/20 transition-colors"
+                  >
+                    Work together
+                  </Link>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
         </motion.div>
